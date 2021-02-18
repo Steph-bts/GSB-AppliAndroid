@@ -84,7 +84,10 @@ class FraisHfAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				int position = (int)v.getTag();
+				// suppression de la liste à l'affichage
 				lesFrais.remove(position);
+				// suppression dans la liste des frais HF
+				Serializer.serialize(Global.listFraisMois, inflater.getContext()) ;
 				notifyDataSetChanged();
 			}
 		});

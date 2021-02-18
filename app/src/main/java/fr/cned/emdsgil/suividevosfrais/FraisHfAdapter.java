@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ class FraisHfAdapter extends BaseAdapter {
 		TextView txtListJour;
 		TextView txtListMontant;
 		TextView txtListMotif;
+		ImageButton cmdSuppHf;
 	}
 
 	@Override
@@ -68,6 +70,7 @@ class FraisHfAdapter extends BaseAdapter {
 			holder.txtListJour = convertView.findViewById(R.id.txtListJour);
 			holder.txtListMontant = convertView.findViewById(R.id.txtListMontant);
 			holder.txtListMotif = convertView.findViewById(R.id.txtListMotif);
+			holder.cmdSuppHf = convertView.findViewById(R.id.cmdSuppHf);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -75,6 +78,16 @@ class FraisHfAdapter extends BaseAdapter {
 		holder.txtListJour.setText(String.format(Locale.FRANCE, "%d", lesFrais.get(index).getJour()));
 		holder.txtListMontant.setText(String.format(Locale.FRANCE, "%.2f", lesFrais.get(index).getMontant()));
 		holder.txtListMotif.setText(lesFrais.get(index).getMotif());
+		holder.cmdSuppHf.setTag(index);
+		// clic sur la croix pour supprimer le profil enregistré :
+		holder.cmdSuppHf.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int position = (int)v.getTag();
+				lesFrais.remove(position);
+				notifyDataSetChanged();
+			}
+		});
 		return convertView;
 	}
 }

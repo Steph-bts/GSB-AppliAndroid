@@ -12,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.util.Calendar;
+
 public class HfActivity extends AppCompatActivity {
 
 	@Override
@@ -19,6 +21,7 @@ public class HfActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hf);
         setTitle("GSB : Frais HF");
+		setDateMiniSaisie();
         // modification de l'affichage du DatePicker
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datHf), true) ;
 		// mise à 0 du montant
@@ -67,6 +70,22 @@ public class HfActivity extends AppCompatActivity {
     		}
     	}) ;    	
     }
+
+	/**
+	 * Attribue une date minimum au DatePicker, puisque pour les frais HF on peut remonter
+	 * un an en arrière. Exemple, pour des frais engagés en août 2021, le visiteur peut
+	 * saisir les frais de septembre 2020 à août 2021.
+	 */
+	private void setDateMiniSaisie() {
+		// instanciation d'une date :
+		Calendar dateMini = Calendar.getInstance();
+		// on remonte 11 mois en arrière
+		dateMini.add(Calendar.MONTH, -11);
+		// ensuite, on sélectionne le 1er jour du mois
+		dateMini.set(Calendar.DAY_OF_MONTH, 1);
+		// on attribue au DatePicker concerné cette date minimum
+		((DatePicker)findViewById(R.id.datHf)).setMinDate(dateMini.getTimeInMillis());
+	}
     
 	/**
 	 * Enregistrement dans la liste du nouveau frais hors forfait

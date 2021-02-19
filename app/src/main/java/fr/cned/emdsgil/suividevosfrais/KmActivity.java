@@ -27,6 +27,8 @@ public class KmActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_km);
         setTitle("GSB : Frais Km");
+        // Blocage du DatePicker : on ne peut pas saisir de frais forfait sur les mois précédents
+		((DatePicker)findViewById(R.id.datKm)).setMinDate(System.currentTimeMillis()-1000);
 		// modification de l'affichage du DatePicker
 		Global.changeAfficheDate((DatePicker) findViewById(R.id.datKm), false) ;
 		// valorisation des propriétés

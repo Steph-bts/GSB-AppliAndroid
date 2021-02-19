@@ -27,6 +27,8 @@ public class RepasActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_repas);
         setTitle("GSB : Frais de repas");
+		// Blocage du DatePicker : on ne peut pas saisir de frais forfait sur les mois précédents
+		((DatePicker)findViewById(R.id.datRepas)).setMinDate(System.currentTimeMillis()-1000);
 		// modification de l'affichage du DatePicker
 		Global.changeAfficheDate((DatePicker) findViewById(R.id.datRepas), false) ;
 		// valorisation des propriétés

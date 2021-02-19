@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_total_recap">
+    tools:context=".TotalRecapActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:lines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Frais du mois de : "
+                    android:text="Fiche de frais de : "
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="24sp"
                     android:textStyle="bold" />

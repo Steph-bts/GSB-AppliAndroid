@@ -28,7 +28,7 @@ public class EtpActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_etp);
         setTitle("GSB : Frais d'étapes");
 		// modification de l'affichage du DatePicker
-		Global.changeAfficheDate((DatePicker) findViewById(R.id.datEtp), false) ;
+		Global.changeAfficheDate((DatePicker) findViewById(R.id.datEtp), false, false) ;
 		// valorisation des propriétés
 		valoriseProprietes() ;
         // chargement des méthodes événementielles

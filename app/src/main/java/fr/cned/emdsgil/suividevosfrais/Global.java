@@ -23,7 +23,7 @@ abstract class Global {
     /**
      * Modification de l'affichage de la date (juste le mois et l'année, sans le jour)
      */
-    public static void changeAfficheDate(DatePicker datePicker, boolean afficheJours) {
+    public static void changeAfficheDate(DatePicker datePicker, boolean afficheJours, boolean recap) {
         try {
             Field f[] = datePicker.getClass().getDeclaredFields();
             for (Field field : f) {
@@ -34,11 +34,14 @@ abstract class Global {
                 if (daySpinnerId != 0)
                 {
                     View daySpinner = datePicker.findViewById(daySpinnerId);
-                    if (!afficheJours)
+                    if (!afficheJours && !recap)
                     {
                         // pour les frais forfait, saisie autorisée uniquement sur le mois en cours :
                         datePicker.setMinDate(System.currentTimeMillis()-1000);
                         datePicker.setMaxDate(System.currentTimeMillis() + 60000);
+                        daySpinner.setVisibility(View.GONE);
+                    } else if(!afficheJours && recap) {
+                        // Pour le récap de frais HF, pas de blocage de dates
                         daySpinner.setVisibility(View.GONE);
                     }
                 }

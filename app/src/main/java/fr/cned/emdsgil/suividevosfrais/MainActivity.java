@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle("GSB : Suivi des frais");
         // récupération des informations sérialisées
         recupSerialize();
+
         // chargement des méthodes événementielles
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
@@ -88,9 +91,15 @@ public class MainActivity extends AppCompatActivity {
     private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                // test vidage du tableau :
+                reinitilisationSerialize();
                 // envoi les informations sérialisées vers le serveur
                 // en construction
             }
         });
+    }
+
+    private void reinitilisationSerialize() {
+        Global.listFraisMois = new Hashtable<>();
     }
 }

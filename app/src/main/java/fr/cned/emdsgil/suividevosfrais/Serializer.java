@@ -1,6 +1,7 @@
 package fr.cned.emdsgil.suividevosfrais;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

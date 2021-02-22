@@ -22,7 +22,7 @@ public class HfRecapActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_hf_recap);
         setTitle("GSB : Récap Frais HF");
 		// modification de l'affichage du DatePicker
-		Global.changeAfficheDate((DatePicker) findViewById(R.id.datHfRecap), false) ;
+		Global.changeAfficheDate((DatePicker) findViewById(R.id.datHfRecap), false, true) ;
 		// valorisation des propriétés
 		afficheListe() ;
         // chargement des méthodes événementielles

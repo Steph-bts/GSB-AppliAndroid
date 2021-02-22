@@ -29,7 +29,7 @@ public class NuitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nuit);
         setTitle("GSB : Frais nuitées");
         // modification de l'affichage du DatePicker
-        Global.changeAfficheDate((DatePicker) findViewById(R.id.datNuit), false) ;
+        Global.changeAfficheDate((DatePicker) findViewById(R.id.datNuit), false, false) ;
         // valorisation des propriétés
         valoriseProprietes();
         imgReturn_clic() ;

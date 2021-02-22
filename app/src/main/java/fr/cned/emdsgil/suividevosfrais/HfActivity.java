@@ -21,9 +21,8 @@ public class HfActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hf);
         setTitle("GSB : Frais HF");
-		setDateMiniSaisie();
-        // modification de l'affichage du DatePicker
-        Global.changeAfficheDate((DatePicker) findViewById(R.id.datHf), true) ;
+        // paramétrage du DatePicker pour une saisie autorisée 11 mois en arrière
+		setDateSaisieHF();
 		// mise à 0 du montant
 		((EditText)findViewById(R.id.txtHf)).setText("0") ;
         // chargement des méthodes événementielles
@@ -75,8 +74,9 @@ public class HfActivity extends AppCompatActivity {
 	 * Attribue une date minimum au DatePicker, puisque pour les frais HF on peut remonter
 	 * un an en arrière. Exemple, pour des frais engagés en août 2021, le visiteur peut
 	 * saisir les frais de septembre 2020 à août 2021.
+	 * Attribue aussi une date maximum, le 1er jour du mois suivant
 	 */
-	private void setDateMiniSaisie() {
+	private void setDateSaisieHF() {
 		// instanciation d'une date :
 		Calendar dateMini = Calendar.getInstance();
 		// on remonte 11 mois en arrière
@@ -85,6 +85,15 @@ public class HfActivity extends AppCompatActivity {
 		dateMini.set(Calendar.DAY_OF_MONTH, 1);
 		// on attribue au DatePicker concerné cette date minimum
 		((DatePicker)findViewById(R.id.datHf)).setMinDate(dateMini.getTimeInMillis());
+
+		// instanciation d'une date maxi
+		Calendar dateMaxi = Calendar.getInstance();
+		// on ajoute 1 mois au mois en cours
+		dateMaxi.add(Calendar.MONTH, 1);
+		// on sélectionne le 1er jour du mois
+		dateMaxi.set(Calendar.DAY_OF_MONTH, 1);
+		// on attribue au DatePicker concerné cette date maximum de saisie
+		((DatePicker)findViewById(R.id.datHf)).setMaxDate(dateMaxi.getTimeInMillis());
 	}
     
 	/**

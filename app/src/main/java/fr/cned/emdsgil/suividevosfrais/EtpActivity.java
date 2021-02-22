@@ -27,8 +27,6 @@ public class EtpActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_etp);
         setTitle("GSB : Frais d'étapes");
-		// Blocage du DatePicker : on ne peut pas saisir de frais forfait sur les mois précédents
-		((DatePicker)findViewById(R.id.datEtp)).setMinDate(System.currentTimeMillis()-1000);
 		// modification de l'affichage du DatePicker
 		Global.changeAfficheDate((DatePicker) findViewById(R.id.datEtp), false) ;
 		// valorisation des propriétés

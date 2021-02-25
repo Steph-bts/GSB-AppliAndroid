@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Cas particulier du bouton pour le transfert d'informations vers le serveur
      */
-    private void cmdTransfert_clic() {
+    /*private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 // test vidage du tableau :
@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
                 // en construction
             }
         });
-    }
+    }*/
 
-    private void reinitilisationSerialize() {
+    /*private void reinitilisationSerialize() {
         Global.listFraisMois = new Hashtable<>();
-    }
+    }*/
 }

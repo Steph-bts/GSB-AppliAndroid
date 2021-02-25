@@ -3,6 +3,8 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.os.Bundle;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -63,9 +66,15 @@ public class HfActivity extends AppCompatActivity {
     private void cmdAjouter_clic() {
     	findViewById(R.id.cmdHfAjouter).setOnClickListener(new Button.OnClickListener() {
     		public void onClick(View v) {
-    			enregListe() ;
-    			Serializer.serialize(Global.listFraisMois, HfActivity.this) ;
-    			retourActivityPrincipale() ;    		
+    			if(enregListe()) {
+					Serializer.serialize(Global.listFraisMois, HfActivity.this) ;
+					retourActivityPrincipale() ;
+				} else {
+					Toast.makeText(HfActivity.this,
+							"vous devez saisir un montant et un libellé",
+							Toast.LENGTH_LONG).show();
+				}
+
     		}
     	}) ;    	
     }
@@ -98,8 +107,9 @@ public class HfActivity extends AppCompatActivity {
     
 	/**
 	 * Enregistrement dans la liste du nouveau frais hors forfait
+	 * Retourne false s'il manque une information (montant ou libellé)
 	 */
-	private void enregListe() {
+	private boolean enregListe() {
 		// récupération des informations saisies
 		Integer annee = ((DatePicker)findViewById(R.id.datHf)).getYear() ;
 		Integer mois = ((DatePicker)findViewById(R.id.datHf)).getMonth() + 1 ;
@@ -108,11 +118,18 @@ public class HfActivity extends AppCompatActivity {
 		String motif = ((EditText)findViewById(R.id.txtHfMotif)).getText().toString() ;
 		// enregistrement dans la liste
 		Integer key = annee*100+mois ;
-		if (!Global.listFraisMois.containsKey(key)) {
-			// creation du mois et de l'annee s'ils n'existent pas déjà
-			Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
+		// vérification que l'utilisateur a bien saisi toutes les informations
+		if(montant <= 0 || motif.isEmpty()) {
+			return false;
+		} else {
+			if (!Global.listFraisMois.containsKey(key)) {
+				// creation du mois et de l'annee s'ils n'existent pas déjà
+				Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
+			}
+			Global.listFraisMois.get(key).addFraisHf(montant, motif, jour) ;
+			Log.d("motif", "**************************" + motif + "*************");
+			return true;
 		}
-		Global.listFraisMois.get(key).addFraisHf(montant, motif, jour) ;		
 	}
 
 	/**

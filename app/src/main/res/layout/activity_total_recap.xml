@@ -205,8 +205,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:gravity="left"
-                        android:text="€"
-                        android:textSize="18sp"/>
+                        android:text="€ Hors Forfait"
+                        android:textSize="18sp" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>
@@ -224,7 +224,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/valider" />
+                android:text="Valider" />
 
         </LinearLayout>
     </LinearLayout>

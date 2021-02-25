@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class TotalRecapActivity extends AppCompatActivity {
         afficheMois();
         valoriseProprietesForfait();
         valoriseProprietesHorsForfait();
+        cmdMenu_clic((Button) findViewById(R.id.cmdTotalValider), ConnexionActivity.class);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +90,8 @@ public class TotalRecapActivity extends AppCompatActivity {
         // récupération des frais :
         if (Global.listFraisMois.containsKey(key)) {
             km = Global.listFraisMois.get(key).getKm();
+            Log.d("Key", "*******************" + Global.listFraisMois.get(key));
+            Log.d("km", "*********************" + km);
             etape = Global.listFraisMois.get(key).getEtape();
             nuitee = Global.listFraisMois.get(key).getNuitee();
             repas = Global.listFraisMois.get(key).getRepas();
@@ -119,11 +125,27 @@ public class TotalRecapActivity extends AppCompatActivity {
                 liste = Global.listFraisMois.get(key).getLesFraisHf();
                 // et on ajoute chaque frais de la liste au montant total
                 for(FraisHf frais : liste) {
+                    Log.d("frais hf", "***************" + frais.getMotif());
+                    Log.d("frais hf", "***************" + frais.getJour());
+                    Log.d("frais hf", "***************" + frais.getMontant());
                     totalFraisHf += frais.getMontant();
                 }
             }
         }
         // Maj du montant dans le TextView du récap total
         ((TextView)findViewById(R.id.txtHfMois)).setText(String.format(Locale.FRANCE, "%.2f", totalFraisHf));
+    }
+
+    /**
+     * Sur la sélection d'un bouton dans l'activité principale ouverture de l'activité correspondante
+     */
+    private void cmdMenu_clic(Button button, final Class classe) {
+        button.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // ouvre l'activité
+                Intent intent = new Intent(TotalRecapActivity.this, classe);
+                startActivity(intent);
+            }
+        });
     }
 }

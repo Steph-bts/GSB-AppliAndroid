@@ -1,5 +1,6 @@
 package fr.cned.emdsgil.suividevosfrais;
 
+import android.content.Context;
 import android.util.Log;
 
 
@@ -20,17 +21,18 @@ import java.util.Date;
 public class AccesDistant implements AsyncResponse {
 
     // constante
-    //private static final String SERVERADDR = "http://192.168.0.18/coach/serveurcoach.php";
+    private static final String SERVERADDR = "http://192.168.56.1/gsb/accesAndroid/serveurGSB.php";
 
     // propriétés
-    //private Controle controle;
+    private Context context;
 
     /**
      * Constructeur
      */
-    /*public AccesDistant(){
-        controle = Controle.getInstance(null);
-    }*/
+    public AccesDistant(){
+        super();
+        //this.context = context;
+    }
 
     /**
      * Retour du serveur HTTP
@@ -48,21 +50,8 @@ public class AccesDistant implements AsyncResponse {
                 Log.d("enreg","****************"+message[1]);
             }else{
                 if(message[0].equals("dernier")){
-//                    Log.d("dernier","****************"+message[1]);
-                    try {
-                        // récupération des informations
-                        JSONObject info = new JSONObject(message[1]);
-                        Integer poids = info.getInt("poids");
-                        Integer taille = info.getInt("taille");
-                        Integer age = info.getInt("age");
-                        Integer sexe = info.getInt("sexe");
-                        //Date dateMesure = MesOutils.convertStringToDate(info.getString("datemesure"),"yyyy-MM-dd hh:mm:ss");
-                        // création et mémorisation du profil
-                        //Profil profil = new Profil(dateMesure, poids, taille, age, sexe);
-                        //controle.setProfil(profil);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Log.d("dernier","****************"+message[1]);
+
                 }else{
                     if(message[0].equals("Erreur !")){
                         Log.d("Erreur !","****************"+message[1]);
@@ -81,12 +70,12 @@ public class AccesDistant implements AsyncResponse {
         AccesHTTP accesDonnees = new AccesHTTP();
         // lien avec AccesHTTP pour permettre à delegate d'appeler la méthode processFinish
         // au retour du serveur
-        //accesDonnees.delegate = this;
+        accesDonnees.delegate = this;
         // ajout de paramètres dans l'enveloppe HTTP
         accesDonnees.addParam("operation", operation);
         accesDonnees.addParam("lesdonnees", lesDonneesJSON.toString());
         // envoi en post des paramètres, à l'adresse SERVERADDR
-        //accesDonnees.execute(SERVERADDR);
+        accesDonnees.execute(SERVERADDR);
     }
 
 }

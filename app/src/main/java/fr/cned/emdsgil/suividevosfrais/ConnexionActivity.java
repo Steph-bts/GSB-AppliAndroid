@@ -2,9 +2,11 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ public class ConnexionActivity extends AppCompatActivity {
     private String mdp;
     private EditText txtLogin;
     private EditText txtMdp;
-    //public AsyncResponse delegate=null; // gestion du retour asynchrone
+
 
 
 
@@ -37,12 +39,10 @@ public class ConnexionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connexion);
         setTitle("GSB : Identification Utilisateur");
         cmdTransfert_clic();
-        Log.d("ConnexionActivity", "********** onCreate");
     }
 
     private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
-            String donneesJson = convertToJSONArray(Global.listFraisMois, login, mdp).toString();
             public void onClick(View v) {
                 txtLogin = (EditText)findViewById(R.id.txtLogin);
                 login = txtLogin.getText().toString();
@@ -55,17 +55,22 @@ public class ConnexionActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG
                     ).show();
                 } else {
+                    Log.d("messageServeur", Global.messageServeur);
                     AccesDistant accesDistant = new AccesDistant();
                     accesDistant.envoi("enreg", convertToJSONArray(Global.listFraisMois, login, mdp));
-                    Log.d("enreg","************** enreg : "+ convertToJSONArray(Global.listFraisMois, login, mdp).toString());
+                    // pour qu'au clic sur le bouton transférer, le clavier disparaisse pour que
+                    // l'utilisateur puisse correctement voir le Toast :
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    // envoi à l'utilisateur le message du serveur via un Toast
+                    Toast.makeText(ConnexionActivity.this, Global.messageServeur, Toast.LENGTH_LONG).show();
+                    //Global.listFraisMois = new Hashtable<>();
                 }
-
             }
         }) ;
     }
 
     private JSONArray convertToJSONArray(Hashtable<Integer, FraisMois> listeFrais, String login, String mdp) {
-        Log.d("Global", "********** convertToJSONArray");
         List laListe = new ArrayList();
         laListe.add(login);
         laListe.add(mdp);
@@ -84,7 +89,6 @@ public class ConnexionActivity extends AppCompatActivity {
             // calcul de la période concernée
             if ((mois - m) >= 1) {
                 key = annee * 100 + (mois - m);
-                Log.d("Key", "********************" + key);
             } else {
                 key = (annee - 1) * 100 + (mois + 12 - m);
             }
@@ -99,68 +103,8 @@ public class ConnexionActivity extends AppCompatActivity {
                 }
             }
         }
-        Log.d("convertJsonToArray", "********** " + (new JSONArray((laListe))));
         return new JSONArray(laListe);
     }
 
 
-    /**
-     * Cas particulier du bouton pour le transfert d'informations vers le serveur
-     */
-    /*private void cmdTransfert_clic(JSONArray lesdonneesJSON) {
-        findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                login = ((EditText)findViewById(R.id.txtLogin)).toString();
-                mdp = ((EditText)findViewById(R.id.txtMdp)).toString();
-
-                try {
-                    envoi("test", convertToJSONArray(Global.listFraisMois));
-                } catch (Exception e) {
-                    Log.d("Message", "*******************Au secours " + e);
-                }
-
-            }
-        });
-        Log.d("ConnexionActivity", "********** cmdTransfert_clic");
-    }*/
-
-    private void reinitilisationSerialize() {
-        Global.listFraisMois = new Hashtable<>();
-    }
-
-    /**
-     * Envoi de données vers le serveur distant
-     *
-     * @param lesDonneesJSON les données à traiter par le serveur
-     */
-    /*public void envoi(String operation, JSONArray lesDonneesJSON){
-        AccesHTTP accesDonnees = new AccesHTTP();
-        // lien avec AccesHTTP pour permettre à delegate d'appeler la méthode processFinish
-        // au retour du serveur
-        accesDonnees.delegate = this;
-        // ajout de paramètres dans l'enveloppe HTTP
-        //accesDonnees.addParam("envoi d'Android", "Coucou !!!");
-        accesDonnees.addParam("operation", operation);
-        accesDonnees.addParam("lesdonnees", lesDonneesJSON.toString());
-        Log.d("accesDonnees", "**************" + accesDonnees.toString());
-        // envoi en post des paramètres, à l'adresse SERVERADDR
-        accesDonnees.execute(SERVERADDR);
-        Log.d("ConnexionActivity", "********** envoi");
-    }*/
-
-   // @Override
-    /*public void processFinish(String output) {
-        Log.d("ConnexionActivity", "********** processFinish");
-        // pour vérification, affiche le contenu du retour dans la console
-        Log.d("serveur", "************" + output);
-        // découpage du message reçu
-        String[] message = output.split("%");
-        // contrôle si le retour est correct (au moins 2 cases)
-        if(message.length>1){
-            if(message[0].equals("Erreur !")){
-                Log.d("Erreur !","****************"+message[1]);
-            }
-        }
-
-    }*/
 }

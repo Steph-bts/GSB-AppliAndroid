@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -127,7 +126,6 @@ public class HfActivity extends AppCompatActivity {
 				Global.listFraisMois.put(key, new FraisMois(annee, mois)) ;
 			}
 			Global.listFraisMois.get(key).addFraisHf(montant, motif, jour) ;
-			Log.d("motif", "**************************" + motif + "*************");
 			return true;
 		}
 	}

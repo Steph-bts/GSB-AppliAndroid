@@ -25,7 +25,8 @@ abstract class Global {
     // fichier contenant les informations sérialisées
     public static final String filename = "save.fic";
 
-    //public static final String SERVERADDR = "http://192.168.56.1/gsb/accesAndroid/serveurGSB.php";
+    // message de retour du serveur à destination de l'utilisateur :
+    public static String messageServeur = "";
 
     /**
      * Modification de l'affichage de la date (juste le mois et l'année, sans le jour)

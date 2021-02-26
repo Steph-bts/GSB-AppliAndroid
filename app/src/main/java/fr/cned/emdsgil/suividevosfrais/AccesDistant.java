@@ -2,6 +2,7 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import fr.cned.emdsgil.suividevosfrais.AccesHTTP;
@@ -26,12 +27,13 @@ public class AccesDistant implements AsyncResponse {
     // propriétés
     private Context context;
 
+
     /**
      * Constructeur
      */
     public AccesDistant(){
         super();
-        //this.context = context;
+        //this.context = (Context)ConnexionActivity.getApp();
     }
 
     /**
@@ -42,21 +44,23 @@ public class AccesDistant implements AsyncResponse {
     public void processFinish(String output) {
         // pour vérification, affiche le contenu du retour dans la console
         Log.d("serveur", "************" + output);
+        Global.messageServeur = "";
         // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
         if(message.length>1){
-            if(message[0].equals("enreg")){
-                Log.d("enreg","****************"+message[1]);
-            }else{
-                if(message[0].equals("dernier")){
-                    Log.d("dernier","****************"+message[1]);
+            Global.messageServeur = message[1];
+            if(message[0].equals("Echec")){
+                Log.d("Echec","****************"+message[1]);
+                //Global.messageServeur = message[1];
 
-                }else{
-                    if(message[0].equals("Erreur !")){
-                        Log.d("Erreur !","****************"+message[1]);
-                    }
-                }
+            }else if(message[0].equals("Authentification_OK")){
+                Log.d("Authentification","****************"+message[1]);
+                //Global.messageServeur = message[1];
+
+            }else if(message[0].equals("Erreur !")){
+                Log.d("Erreur !","****************"+message[1]);
+
             }
         }
     }

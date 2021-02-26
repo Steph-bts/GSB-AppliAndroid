@@ -27,7 +27,6 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
 	public AccesHTTP() {
 
 		super();
-		Log.d("AccesHTTP", "********** constructeur");
 	}
 
 	/**
@@ -36,16 +35,13 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
 	 * @param valeur
 	 */
 	public void addParam(String nom, String valeur) {
-		Log.d("AccesHTTP", "********** addParam");
 		try {
 			if (parametres.equals("")) {
 				// premier paramètre
 				parametres = URLEncoder.encode(nom, "UTF-8") + "=" + URLEncoder.encode(valeur, "UTF-8");
-				Log.d("addParam", parametres);
 			}else{
 				// paramètres suivants (séparés par &)
 				parametres += "&" + URLEncoder.encode(nom, "UTF-8") + "=" + URLEncoder.encode(valeur, "UTF-8");
-				Log.d("addParam", parametres);
 			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -60,7 +56,6 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
 	 */
 	@Override
 	protected Long doInBackground(String... urls) {
-		Log.d("AccesHTTP", "********** doInBackground");
 		// pour éliminer certaines erreurs
 		System.setProperty("http.keepAlive", "false");
 		// objets pour gérer la connexion, la lecture et l'écriture
@@ -106,7 +101,6 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
 	 */
 	@Override
 	protected void onPostExecute(Long result) {
-		Log.d("AccesHTTP", "********** onPostExecute");
 		// ret contient l'information récupérée
 		delegate.processFinish(this.ret.toString());
     }

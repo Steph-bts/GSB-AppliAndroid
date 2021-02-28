@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -90,8 +89,6 @@ public class TotalRecapActivity extends AppCompatActivity {
         // récupération des frais :
         if (Global.listFraisMois.containsKey(key)) {
             km = Global.listFraisMois.get(key).getKm();
-            Log.d("Key", "*******************" + Global.listFraisMois.get(key));
-            Log.d("km", "*********************" + km);
             etape = Global.listFraisMois.get(key).getEtape();
             nuitee = Global.listFraisMois.get(key).getNuitee();
             repas = Global.listFraisMois.get(key).getRepas();
@@ -125,9 +122,6 @@ public class TotalRecapActivity extends AppCompatActivity {
                 liste = Global.listFraisMois.get(key).getLesFraisHf();
                 // et on ajoute chaque frais de la liste au montant total
                 for(FraisHf frais : liste) {
-                    Log.d("frais hf", "***************" + frais.getMotif());
-                    Log.d("frais hf", "***************" + frais.getJour());
-                    Log.d("frais hf", "***************" + frais.getMontant());
                     totalFraisHf += frais.getMontant();
                 }
             }

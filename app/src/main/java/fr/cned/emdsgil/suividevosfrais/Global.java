@@ -1,5 +1,6 @@
 package fr.cned.emdsgil.suividevosfrais;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
@@ -25,8 +26,8 @@ abstract class Global {
     // fichier contenant les informations sérialisées
     public static final String filename = "save.fic";
 
-    // message de retour du serveur à destination de l'utilisateur :
-    public static String messageServeur = "";
+    public static Context context;
+
 
     /**
      * Modification de l'affichage de la date (juste le mois et l'année, sans le jour)

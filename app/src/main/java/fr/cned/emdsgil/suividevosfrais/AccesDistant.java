@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import fr.cned.emdsgil.suividevosfrais.ConnexionActivity;
+
 
 import fr.cned.emdsgil.suividevosfrais.AccesHTTP;
 import fr.cned.emdsgil.suividevosfrais.AsyncResponse;
@@ -15,6 +19,8 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
+
+
 /**
  * Created by emds on 25/02/2018.
  */
@@ -24,16 +30,11 @@ public class AccesDistant implements AsyncResponse {
     // constante
     private static final String SERVERADDR = "http://192.168.56.1/gsb/accesAndroid/serveurGSB.php";
 
-    // propriétés
-    private Context context;
-
-
     /**
      * Constructeur
      */
     public AccesDistant(){
         super();
-        //this.context = (Context)ConnexionActivity.getApp();
     }
 
     /**
@@ -44,23 +45,23 @@ public class AccesDistant implements AsyncResponse {
     public void processFinish(String output) {
         // pour vérification, affiche le contenu du retour dans la console
         Log.d("serveur", "************" + output);
-        Global.messageServeur = "";
         // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
+
         if(message.length>1){
-            Global.messageServeur = message[1];
             if(message[0].equals("Echec")){
                 Log.d("Echec","****************"+message[1]);
-                //Global.messageServeur = message[1];
-
+                Toast.makeText(Global.context, message[1], Toast.LENGTH_LONG).show();
             }else if(message[0].equals("Authentification_OK")){
                 Log.d("Authentification","****************"+message[1]);
-                //Global.messageServeur = message[1];
-
+                Toast.makeText(Global.context, message[1], Toast.LENGTH_LONG).show();
             }else if(message[0].equals("Erreur !")){
                 Log.d("Erreur !","****************"+message[1]);
-
+                Toast.makeText(
+                        Global.context,
+                        "Connexion impossible ! Veuillez contacter votre service informatique",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }

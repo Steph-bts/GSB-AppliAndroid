@@ -1,10 +1,34 @@
 package fr.cned.emdsgil.suividevosfrais;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -14,6 +38,12 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -31,14 +61,16 @@ public class ConnexionActivity extends AppCompatActivity {
     private EditText txtMdp;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
         setTitle("GSB : Identification Utilisateur");
         cmdTransfert_clic();
+    }
+
+    public ConnexionActivity getInstance() {
+        return this;
     }
 
     private void cmdTransfert_clic() {
@@ -55,15 +87,14 @@ public class ConnexionActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG
                     ).show();
                 } else {
-                    Log.d("messageServeur", Global.messageServeur);
                     AccesDistant accesDistant = new AccesDistant();
+                    Global.context = ConnexionActivity.this;
                     accesDistant.envoi("enreg", convertToJSONArray(Global.listFraisMois, login, mdp));
                     // pour qu'au clic sur le bouton transférer, le clavier disparaisse pour que
                     // l'utilisateur puisse correctement voir le Toast :
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    // envoi à l'utilisateur le message du serveur via un Toast
-                    Toast.makeText(ConnexionActivity.this, Global.messageServeur, Toast.LENGTH_LONG).show();
+
                     //Global.listFraisMois = new Hashtable<>();
                 }
             }
@@ -105,6 +136,4 @@ public class ConnexionActivity extends AppCompatActivity {
         }
         return new JSONArray(laListe);
     }
-
-
 }

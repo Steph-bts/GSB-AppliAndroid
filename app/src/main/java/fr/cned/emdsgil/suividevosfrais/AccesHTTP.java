@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import android.os.AsyncTask;
-import android.util.Log;
+
 
 /**
  * Classe technique de connexion distante HTTP

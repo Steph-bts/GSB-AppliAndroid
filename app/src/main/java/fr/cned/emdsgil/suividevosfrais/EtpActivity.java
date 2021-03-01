@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
+/**
+ * Activity = Saisie du nombre d'étapes
+ * Created by Stéphanie Otto on 25/02/2021
+ */
 public class EtpActivity extends AppCompatActivity {
 
 	// informations affichées dans l'activité

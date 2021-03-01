@@ -16,6 +16,10 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+/**
+ * Activity = Saisie du nombre de nuitées
+ * Created by Stéphanie Otto on 25/02/2021
+ */
 public class NuitActivity extends AppCompatActivity {
 
     // informations affichées dans l'activité

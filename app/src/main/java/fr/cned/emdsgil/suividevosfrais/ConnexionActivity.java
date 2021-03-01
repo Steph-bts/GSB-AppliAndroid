@@ -21,9 +21,10 @@ import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.List;
 
-
-
-
+/**
+ * Activity = Saisie du Login et du Mdp, transfert pour maj de la bdd distante
+ * Created by Stéphanie Otto on 25/02/2021.
+ */
 public class ConnexionActivity extends AppCompatActivity {
 
     private String login;

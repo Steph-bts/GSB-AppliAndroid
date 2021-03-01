@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * Activity = Affichage d'une liste avec le total des frais saisis dans l'appli, avant la validation
+ * pour transfert vers la bdd
+ * Created by Stéphanie Otto on 25/02/2021
+ */
 public class TotalRecapActivity extends AppCompatActivity {
 
     private Integer mois; // mois concerné

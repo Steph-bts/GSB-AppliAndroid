@@ -14,6 +14,10 @@ import android.widget.ImageButton;
 
 import java.util.Hashtable;
 
+/**
+ * Activity = Page d'accueil de l'application
+ * Created by Emds & Stéphanie Otto
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

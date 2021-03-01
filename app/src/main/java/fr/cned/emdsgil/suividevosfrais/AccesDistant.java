@@ -1,23 +1,9 @@
 package fr.cned.emdsgil.suividevosfrais;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
-import fr.cned.emdsgil.suividevosfrais.ConnexionActivity;
-
-
-import fr.cned.emdsgil.suividevosfrais.AccesHTTP;
-import fr.cned.emdsgil.suividevosfrais.AsyncResponse;
-
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.Hashtable;
 
 
 /**

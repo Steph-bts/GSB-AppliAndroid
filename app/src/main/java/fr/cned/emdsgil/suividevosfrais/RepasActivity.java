@@ -15,6 +15,10 @@ import android.widget.ImageView;
 
 import java.util.Locale;
 
+/**
+ * Activity = Saisie du nombre de repas
+ * Created by Stéphanie Otto on 25/02/2021
+ */
 public class RepasActivity extends AppCompatActivity {
 
 	// informations affichées dans l'activité

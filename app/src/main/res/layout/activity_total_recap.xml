@@ -124,8 +124,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:gravity="left"
-                        android:text="Nuits"
-                        android:textSize="18sp"/>
+                        android:text="Nuitées"
+                        android:textSize="18sp" />
                 </TableRow>
 
                 <TableRow

@@ -14,6 +14,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Activity = Affichage liste des frais Hors Forfait
+ * Created by Emds & Stéphanie Otto
+ */
 public class HfRecapActivity extends AppCompatActivity {
 
 	@Override

@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+/**
+ * Activity = Saisie des frais Hors Forfait
+ * Created by Emds & Stéphanie Otto
+ */
 public class HfActivity extends AppCompatActivity {
 
 	@Override

@@ -29,6 +29,9 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -69,10 +72,44 @@ public class ConnexionActivity extends AppCompatActivity {
         cmdTransfert_clic();
     }
 
+    /**
+     * Retourne l'instance de ConnexionActivity, afin de pouvoir l'utiliser dans une autre classe
+     * pour envoyer un Toast
+     * @return
+     */
     public ConnexionActivity getInstance() {
         return this;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getTitle().equals(getString(R.string.retour_accueil))) {
+            retourActivityPrincipale() ;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Retour à l'activité principale (le menu)
+     */
+    private void retourActivityPrincipale() {
+        Intent intent = new Intent(ConnexionActivity.this, MainActivity.class) ;
+        startActivity(intent) ;
+    }
+
+    /**
+     * Click sur le bouton "transférer la fiche" : récupération et transtypage des login et mdp
+     * saisis par l'utilisateur, envoie d'un Toast si ces champs sont vides, sinon envoi
+     * des données au format JSON
+     */
     private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -94,13 +131,20 @@ public class ConnexionActivity extends AppCompatActivity {
                     // l'utilisateur puisse correctement voir le Toast :
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-                    //Global.listFraisMois = new Hashtable<>();
                 }
             }
         }) ;
     }
 
+    /**
+     * Méthode qui permet de convertir le <hashtable>listFraisMois en JSONArray pour transfert
+     * vers la page PHP
+     * @param listeFrais : Hashtable<Integer, FraisMois>
+     * @param login : String
+     * @param mdp : String
+     * @return JSONArray : [login, mdp, nbreKm, nbreNuitee, nbreRepas, nbreEtapes, périodeHF, jourHF,
+     *                      montantHF, motifHF]
+     */
     private JSONArray convertToJSONArray(Hashtable<Integer, FraisMois> listeFrais, String login, String mdp) {
         List laListe = new ArrayList();
         laListe.add(login);

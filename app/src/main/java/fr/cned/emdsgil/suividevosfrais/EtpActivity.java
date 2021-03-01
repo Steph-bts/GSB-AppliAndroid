@@ -2,6 +2,8 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.DatePicker.OnDateChangedListener;
@@ -37,6 +39,7 @@ public class EtpActivity extends AppCompatActivity {
 		cmdPlus_clic() ;
 		cmdMoins_clic() ;
 		dat_clic() ;
+		Log.d("ETP/listFraisMois", "****************" + Global.listFraisMois);
 	}
 
 	@Override

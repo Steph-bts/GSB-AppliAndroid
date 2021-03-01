@@ -1,7 +1,6 @@
 package fr.cned.emdsgil.suividevosfrais;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Hashtable;
 
 /**
  * Classe qui permet de sérialiser et désérialiser des objets
@@ -42,10 +42,12 @@ abstract class Serializer {
 	
 	/**
 	 * Désérialisation d'un objet
+	 *
+	 * @param listFraisMois
 	 * @param context Accès au contexte de l'application
 	 * @return Objet déserialisé
 	 */
-	public static Object deSerialize(Context context) {
+	public static Object deSerialize(Hashtable<Integer, FraisMois> listFraisMois, Context context) {
 		try {
 			FileInputStream file = context.openFileInput(Global.filename) ;
 			ObjectInputStream ois;

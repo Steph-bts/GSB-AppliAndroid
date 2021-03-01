@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("GSB : Suivi des frais");
-        // récupération des informations sérialisées
-        recupSerialize();
 
         // chargement des méthodes événementielles
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
@@ -32,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtpActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdTransfert)), TotalRecapActivity.class);
-        //cmdTransfert_clic();
+
+        // méthode pour charger le tableau de frais s'il existe, ou pour le vider s'il a été transféré
+        serialize();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
          * on cast chaque valeur dans le type attendu.
          * Seulement ensuite on affecte cet Hastable à Global.listFraisMois.
         */
-        Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(MainActivity.this);
+        Hashtable<?, ?> monHash = (Hashtable<?, ?>) Serializer.deSerialize(Global.listFraisMois, MainActivity.this);
         if (monHash != null) {
             Hashtable<Integer, FraisMois> monHashCast = new Hashtable<>();
             for (Hashtable.Entry<?, ?> entry : monHash.entrySet()) {
@@ -85,21 +85,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Cas particulier du bouton pour le transfert d'informations vers le serveur
-     */
-    /*private void cmdTransfert_clic() {
-        findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // test vidage du tableau :
-                reinitilisationSerialize();
-                // envoi les informations sérialisées vers le serveur
-                // en construction
-            }
-        });
-    }*/
 
-    /*private void reinitilisationSerialize() {
-        Global.listFraisMois = new Hashtable<>();
-    }*/
+    /**
+     * Méthode qui, dans le cas où les frais auraient été transférés, vide le hashtable listFraisMois,
+     * sérialize-désérialize le hashtable, et enfin remet la variable booléenne Global.transfertOK
+     * à false.
+     * Si les frais n'ont pas été transférés (Global.transfertOK == false), alors récupération
+     * avec la méthode recupSerialize()
+     */
+    private void serialize() {
+        if(Global.transfertOK) {
+            Global.listFraisMois.clear();
+            Serializer.serialize(Global.listFraisMois, MainActivity.this);
+            Serializer.deSerialize(Global.listFraisMois, MainActivity.this);
+            Global.transfertOK = false;
+        } else {
+            recupSerialize();
+        }
+    }
 }

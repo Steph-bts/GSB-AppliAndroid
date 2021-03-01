@@ -17,7 +17,7 @@ import java.util.List;
 abstract class Global {
 
     // tableau d'informations mémorisées
-    public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<>();
+    public static volatile Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<>();
     /* Retrait du type de l'Hashtable (Optimisation Android Studio)
      * Original : Typage explicit =
      * public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<Integer, FraisMois>();
@@ -27,6 +27,8 @@ abstract class Global {
     public static final String filename = "save.fic";
 
     public static Context context;
+
+    public static boolean transfertOK = false;
 
 
     /**

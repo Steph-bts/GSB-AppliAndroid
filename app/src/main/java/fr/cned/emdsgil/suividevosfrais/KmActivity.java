@@ -37,6 +37,7 @@ public class KmActivity extends AppCompatActivity {
 		cmdPlus_clic() ;
 		cmdMoins_clic() ;
 		dat_clic() ;
+
 	}
 
 	@Override

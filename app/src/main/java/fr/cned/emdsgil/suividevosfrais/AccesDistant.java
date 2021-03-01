@@ -3,7 +3,6 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.cned.emdsgil.suividevosfrais.ConnexionActivity;
@@ -18,7 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
-
+import java.util.Hashtable;
 
 
 /**
@@ -56,6 +55,8 @@ public class AccesDistant implements AsyncResponse {
             }else if(message[0].equals("Authentification_OK")){
                 Log.d("Authentification","****************"+message[1]);
                 Toast.makeText(Global.context, message[1], Toast.LENGTH_LONG).show();
+                // "Vidage" du tableau listFraisMois :
+                Global.transfertOK = true;
             }else if(message[0].equals("Erreur !")){
                 Log.d("Erreur !","****************"+message[1]);
                 Toast.makeText(

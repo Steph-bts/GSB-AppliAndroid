@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 			 * Original : Typage explicit =
 			 * Global.listFraisMois = new Hashtable<Integer, FraisMois>();
 			*/
-
         }
     }
 

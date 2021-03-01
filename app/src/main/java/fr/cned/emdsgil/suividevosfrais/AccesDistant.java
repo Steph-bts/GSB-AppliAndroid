@@ -27,7 +27,7 @@ import java.util.Hashtable;
 public class AccesDistant implements AsyncResponse {
 
     // constante
-    private static final String SERVERADDR = "http://192.168.56.1/gsb/accesAndroid/serveurGSB.php";
+    private static final String SERVERADDR = "http://192.168.56.1/GSB/accesAndroid/serveurGSB.php";
 
     /**
      * Constructeur

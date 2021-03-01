@@ -14,8 +14,6 @@ class FraisMois implements Serializable {
     private Integer km; // nombre de km du mois
     private Integer nuitee; // nombre de nuitées du mois
     private Integer repas; // nombre de repas du mois
-    private String login;
-    private String mdp;
     private final ArrayList<FraisHf> lesFraisHf; // liste des frais hors forfait du mois
 
     public FraisMois(Integer annee, Integer mois) {

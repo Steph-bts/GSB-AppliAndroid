@@ -13,7 +13,7 @@ import org.json.JSONArray;
 public class AccesDistant implements AsyncResponse {
 
     // constante
-    private static final String SERVERADDR = "http://192.168.56.1/GSB/accesAndroid/serveurGSB.php";
+    private static final String SERVERADDR = "http://gsbvisiteur.lencodage.fr/accesAndroid/serveurGSB.php";
 
     /**
      * Constructeur
@@ -41,7 +41,7 @@ public class AccesDistant implements AsyncResponse {
             }else if(message[0].equals("Authentification_OK")){
                 Log.d("Authentification","****************"+message[1]);
                 Toast.makeText(Global.context, message[1], Toast.LENGTH_LONG).show();
-                // "Vidage" du tableau listFraisMois :
+                // Puisque le transfert s'est bien passé, valorisation de la variable globale :
                 Global.transfertOK = true;
             }else if(message[0].equals("Erreur !")){
                 Log.d("Erreur !","****************"+message[1]);

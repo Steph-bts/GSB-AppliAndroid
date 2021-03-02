@@ -39,7 +39,6 @@ abstract class Global {
             Field f[] = datePicker.getClass().getDeclaredFields();
             for (Field field : f) {
                 int daySpinnerId = Resources.getSystem().getIdentifier("day", "id", "android");
-                //Log.d("daySpinnerId", "**********************"+daySpinnerId);
                 datePicker.init(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), null);
 
                 if (daySpinnerId != 0) {

@@ -13,4 +13,5 @@ _Appli Android Contexte GSB_
 - Cette application a été développée avec l'API 26, et avec Android Studio
 - Pour les fichiers de l'appli mobile, il faut se rendre dans /app/src/main/
 - Et le fichier serveurGSB ainsi que les includes sont dans /php
+- Pour tester l'appli sur votre smartphone, veuillez télécharger le fichier app-debug.apk
 

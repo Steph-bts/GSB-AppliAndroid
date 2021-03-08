@@ -33,7 +33,6 @@ public class AccesDistant implements AsyncResponse {
         // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
-
         if(message.length>1){
             if(message[0].equals("Echec")){
                 Log.d("Echec","****************"+message[1]);
@@ -41,8 +40,9 @@ public class AccesDistant implements AsyncResponse {
             }else if(message[0].equals("Authentification_OK")){
                 Log.d("Authentification","****************"+message[1]);
                 Toast.makeText(Global.context, message[1], Toast.LENGTH_LONG).show();
-                // Puisque le transfert s'est bien passé, valorisation de la variable globale :
-                Global.transfertOK = true;
+                // Puisque le transfert s'est bien passé, remise à 0 du tableau de frais :
+                Global.listFraisMois.clear();
+                Serializer.serialize(Global.listFraisMois, Global.context);
             }else if(message[0].equals("Erreur !")){
                 Log.d("Erreur !","****************"+message[1]);
                 Toast.makeText(

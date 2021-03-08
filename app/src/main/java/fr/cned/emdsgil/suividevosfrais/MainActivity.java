@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdTransfert)), TotalRecapActivity.class);
 
-        // méthode pour charger le tableau de frais s'il existe, ou pour le vider s'il a été transféré
-        serialize();
+        // méthode pour charger le tableau de frais s'il existe
+        recupSerialize();
     }
 
     @Override
@@ -86,24 +86,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-
-    /**
-     * Méthode qui, dans le cas où les frais auraient été transférés, vide le hashtable listFraisMois,
-     * sérialize-désérialize le hashtable, et enfin remet la variable booléenne Global.transfertOK
-     * à false.
-     * Si les frais n'ont pas été transférés (Global.transfertOK == false), alors récupération
-     * avec la méthode recupSerialize()
-     */
-    private void serialize() {
-        if(Global.transfertOK) {
-            Global.listFraisMois.clear();
-            Serializer.serialize(Global.listFraisMois, MainActivity.this);
-            Serializer.deSerialize(Global.listFraisMois, MainActivity.this);
-            Global.transfertOK = false;
-        } else {
-            recupSerialize();
-        }
     }
 }

@@ -488,7 +488,7 @@ class PdoGsb
     {
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'UPDATE gsb_fichefrais '
-            . 'SET gsb_idetat = :unEtat, datemodif = now() '
+            . 'SET idetat = :unEtat, datemodif = now() '
             . 'WHERE gsb_fichefrais.idvisiteur = :unIdVisiteur '
             . 'AND gsb_fichefrais.mois = :unMois'
         );
